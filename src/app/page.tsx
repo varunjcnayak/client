@@ -1,65 +1,139 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header */}
+      <header className="border-b">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">
+              C
+            </div>
+            <span className="font-bold text-xl">CourtBook</span>
+          </div>
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+            <Link href="/courts" className="hover:text-primary">Browse Courts</Link>
+            <Link href="/about" className="hover:text-primary">About</Link>
+            <Link href="/contact" className="hover:text-primary">Contact</Link>
+          </nav>
+          <div className="flex items-center gap-4">
+            <Link href="/login">
+              <Button variant="ghost">Log in</Button>
+            </Link>
+            <Link href="/signup">
+              <Button>Sign up</Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      {/* Hero Section */}
+      <main className="flex-1">
+        <section className="py-20 md:py-32 bg-muted/30">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+              Book Your Perfect Court <br className="hidden md:block" />
+              <span className="text-primary">In Seconds</span>
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
+              Find and book badminton, tennis, and squash courts near you.
+              Real-time availability, instant confirmation, and seamless payments.
+            </p>
+
+            <div className="max-w-md mx-auto bg-card p-2 rounded-full shadow-lg border flex items-center gap-2 pl-6">
+              <Search className="w-5 h-5 text-muted-foreground" />
+              <Input
+                placeholder="Search by location or court name..."
+                className="border-0 shadow-none focus-visible:ring-0 bg-transparent"
+              />
+              <Button className="rounded-full px-8">Search</Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Courts (Placeholder) */}
+        <section className="py-20 container mx-auto px-4">
+          <div className="flex items-center justify-between mb-10">
+            <h2 className="text-3xl font-bold">Featured Courts</h2>
+            <Link href="/courts">
+              <Button variant="outline">View All</Button>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="group rounded-xl border bg-card overflow-hidden hover:shadow-lg transition-all">
+                <div className="aspect-video bg-muted relative">
+                  {/* Placeholder Image */}
+                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
+                    Court Image {i}
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
+                        Smash Arena {i}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">Downtown, City Center</p>
+                    </div>
+                    <div className="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded">
+                      $20/hr
+                    </div>
+                  </div>
+                  <div className="mt-4 flex gap-2">
+                    <Button className="w-full">Book Now</Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t py-12 bg-muted/30">
+        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center text-primary-foreground font-bold text-xs">
+                C
+              </div>
+              <span className="font-bold">CourtBook</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              The easiest way to find and book sports courts in your area.
+            </p>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Platform</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link href="/courts">Browse Courts</Link></li>
+              <li><Link href="/pricing">Pricing</Link></li>
+              <li><Link href="/partners">For Court Owners</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Company</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link href="/about">About Us</Link></li>
+              <li><Link href="/careers">Careers</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link href="/terms">Terms of Service</Link></li>
+              <li><Link href="/privacy">Privacy Policy</Link></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
