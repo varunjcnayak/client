@@ -1,137 +1,202 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search, MapPin, ArrowRight, Trophy, Activity, Dumbbell } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col font-sans">
       {/* Header */}
-      <header className="border-b">
+      <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold shadow-lg shadow-primary/20">
               C
             </div>
-            <span className="font-bold text-xl">CourtBook</span>
+            <span className="font-bold text-xl tracking-tight">CourtBook</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link href="/courts" className="hover:text-primary">Browse Courts</Link>
-            <Link href="/about" className="hover:text-primary">About</Link>
-            <Link href="/contact" className="hover:text-primary">Contact</Link>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+            <Link href="/courts" className="hover:text-primary transition-colors">Browse Courts</Link>
+            <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+            <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
           </nav>
           <div className="flex items-center gap-4">
             <Link href="/login">
-              <Button variant="ghost">Log in</Button>
+              <Button variant="ghost" className="font-medium">Log in</Button>
             </Link>
             <Link href="/signup">
-              <Button>Sign up</Button>
+              <Button className="font-medium shadow-md shadow-primary/20">Sign up</Button>
             </Link>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <main className="flex-1">
-        <section className="py-20 md:py-32 bg-muted/30">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-              Book Your Perfect Court <br className="hidden md:block" />
-              <span className="text-primary">In Seconds</span>
+      <main className="flex-1 pt-16">
+        {/* Hero Section */}
+        <section className="relative py-24 md:py-32 overflow-hidden">
+          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background"></div>
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium mb-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Live Availability in Your Area
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 animate-in fade-in slide-in-from-bottom-6 duration-700">
+              Book Your Game. <br />
+              <span className="text-primary">Own the Court.</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              Find and book badminton, tennis, and squash courts near you.
-              Real-time availability, instant confirmation, and seamless payments.
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+              The premium destination for finding and booking badminton, tennis, and squash courts. Instant confirmation, zero hassle.
             </p>
 
-            <div className="max-w-md mx-auto bg-card p-2 rounded-full shadow-lg border flex items-center gap-2 pl-6">
-              <Search className="w-5 h-5 text-muted-foreground" />
+            <div className="max-w-xl mx-auto bg-card/50 backdrop-blur-sm p-2 rounded-full shadow-2xl border flex items-center gap-2 pl-6 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200">
+              <MapPin className="w-5 h-5 text-muted-foreground" />
               <Input
-                placeholder="Search by location or court name..."
-                className="border-0 shadow-none focus-visible:ring-0 bg-transparent"
+                placeholder="Find courts nearby..."
+                className="border-0 shadow-none focus-visible:ring-0 bg-transparent text-base h-12"
               />
-              <Button className="rounded-full px-8">Search</Button>
+              <Button size="lg" className="rounded-full px-8 shadow-lg shadow-primary/25">
+                Search
+              </Button>
             </div>
           </div>
         </section>
 
-        {/* Featured Courts (Placeholder) */}
+        {/* Interactive Sports Selection */}
         <section className="py-20 container mx-auto px-4">
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="text-3xl font-bold">Featured Courts</h2>
-            <Link href="/courts">
-              <Button variant="outline">View All</Button>
-            </Link>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Choose Your Sport</h2>
+            <p className="text-muted-foreground">Select a category to find the perfect court for your game.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="group rounded-xl border bg-card overflow-hidden hover:shadow-lg transition-all">
-                <div className="aspect-video bg-muted relative">
-                  {/* Placeholder Image */}
-                  <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-                    Court Image {i}
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              { name: "Badminton", icon: Trophy, color: "text-blue-500", bg: "bg-blue-500/10", desc: "Indoor wooden & synthetic courts" },
+              { name: "Tennis", icon: Activity, color: "text-green-500", bg: "bg-green-500/10", desc: "Clay, grass, and hard courts" },
+              { name: "Squash", icon: Dumbbell, color: "text-orange-500", bg: "bg-orange-500/10", desc: "Professional glass-back courts" }
+            ].map((sport) => (
+              <Link href={`/courts?sport=${sport.name.toLowerCase()}`} key={sport.name} className="group">
+                <div className="relative h-full p-8 rounded-3xl border bg-card hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 overflow-hidden">
+                  <div className={`absolute top-0 right-0 w-32 h-32 ${sport.bg} rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110`}></div>
+
+                  <div className={`w-14 h-14 ${sport.bg} ${sport.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <sport.icon className="w-7 h-7" />
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{sport.name}</h3>
+                  <p className="text-muted-foreground mb-6">{sport.desc}</p>
+
+                  <div className="flex items-center text-sm font-medium text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    Browse Courts <ArrowRight className="w-4 h-4 ml-1" />
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-                        Smash Arena {i}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">Downtown, City Center</p>
-                    </div>
-                    <div className="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded">
-                      $20/hr
-                    </div>
-                  </div>
-                  <div className="mt-4 flex gap-2">
-                    <Button className="w-full">Book Now</Button>
-                  </div>
-                </div>
-              </div>
+              </Link>
             ))}
+          </div>
+        </section>
+
+        {/* Featured Courts */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <h2 className="text-3xl font-bold mb-2">Trending Courts</h2>
+                <p className="text-muted-foreground">Top-rated venues booked by players this week.</p>
+              </div>
+              <Link href="/courts">
+                <Button variant="outline" className="hidden md:flex">View All Courts</Button>
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="group rounded-2xl border bg-card overflow-hidden hover:shadow-xl transition-all duration-300">
+                  <div className="aspect-[4/3] bg-muted relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                    {/* Placeholder Image Effect */}
+                    <div className="absolute inset-0 bg-muted-foreground/10 group-hover:scale-105 transition-transform duration-500"></div>
+
+                    <div className="absolute bottom-4 left-4 z-20 text-white">
+                      <div className="bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded mb-2 w-fit">
+                        Badminton
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors mb-1">
+                          Smash Arena Premium
+                        </h3>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <MapPin className="w-3 h-3 mr-1" /> Downtown, City Center
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-lg">$25</div>
+                        <div className="text-xs text-muted-foreground">per hour</div>
+                      </div>
+                    </div>
+                    <Button className="w-full font-medium group-hover:bg-primary/90">Book Now</Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center md:hidden">
+              <Link href="/courts">
+                <Button variant="outline" className="w-full">View All Courts</Button>
+              </Link>
+            </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-muted/30">
-        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center text-primary-foreground font-bold text-xs">
+      <footer className="border-t py-16 bg-card">
+        <div className="container mx-auto px-4 grid md:grid-cols-4 gap-12">
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">
                 C
               </div>
-              <span className="font-bold">CourtBook</span>
+              <span className="font-bold text-xl">CourtBook</span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              The easiest way to find and book sports courts in your area.
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+              Empowering athletes to find their space. The easiest way to book sports courts in your city.
             </p>
           </div>
+
           <div>
-            <h4 className="font-semibold mb-4">Platform</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/courts">Browse Courts</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
-              <li><Link href="/partners">For Court Owners</Link></li>
+            <h4 className="font-bold mb-6">Platform</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/courts" className="hover:text-foreground transition-colors">Browse Courts</Link></li>
+              <li><Link href="/pricing" className="hover:text-foreground transition-colors">Pricing</Link></li>
+              <li><Link href="/partners" className="hover:text-foreground transition-colors">List Your Court</Link></li>
             </ul>
           </div>
+
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/careers">Careers</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
+            <h4 className="font-bold mb-6">Company</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/about" className="hover:text-foreground transition-colors">About Us</Link></li>
+              <li><Link href="/careers" className="hover:text-foreground transition-colors">Careers</Link></li>
+              <li><Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link></li>
             </ul>
           </div>
+
           <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/terms">Terms of Service</Link></li>
-              <li><Link href="/privacy">Privacy Policy</Link></li>
+            <h4 className="font-bold mb-6">Legal</h4>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li><Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
+        </div>
+        <div className="container mx-auto px-4 mt-16 pt-8 border-t text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} CourtBook. All rights reserved.
         </div>
       </footer>
     </div>
